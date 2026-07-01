@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: anemicheck
+    runtime: docker
+    plan: standard # the free/starter plan's RAM is too small for two loaded PyTorch models
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: FORCE_CPU
+        value: "true"
+      - key: INVERT_CLASSIFIER_OUTPUT
+        value: "true" # see config.py - remove once the model is retrained with correct label mapping
